@@ -1,0 +1,107 @@
+Current configuration : 1299 bytes
+!
+version 12.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname west
+!
+!
+!
+enable secret 5 $1$mERr$9cTjUIEqNGurQiFU.ZeCi1
+!
+!
+!
+!
+!
+!
+no ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+no ip domain-lookup
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface FastEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1.10
+ encapsulation dot1Q 10
+ ip address 172.17.112.1 255.255.254.0
+!
+interface FastEthernet0/1.20
+ encapsulation dot1Q 20
+ ip address 172.17.114.1 255.255.255.128
+!
+interface FastEthernet0/1.99
+ encapsulation dot1Q 99
+ ip address 172.17.114.145 255.255.255.248
+!
+interface Serial0/0/0
+ ip address 172.17.114.154 255.255.255.252
+!
+interface Serial0/0/1
+ no ip address
+ clock rate 2000000
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 1
+ router-id 11.11.11.11
+ log-adjacency-changes
+ network 172.17.114.152 0.0.0.3 area 0
+ network 172.17.112.0 0.0.1.255 area 0
+ network 172.17.114.0 0.0.0.127 area 0
+ network 172.17.114.144 0.0.0.7 area 0
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ password cisco
+ logging synchronous
+ login
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
