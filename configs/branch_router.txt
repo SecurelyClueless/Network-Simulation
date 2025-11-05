@@ -1,0 +1,127 @@
+Current configuration : 1818 bytes
+!
+version 12.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname Branch
+!
+!
+!
+enable secret 5 $1$mERr$9cTjUIEqNGurQiFU.ZeCi1
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+no ip domain-lookup
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ ip address 209.165.199.118 255.255.255.252
+ ip nat outside
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ no ip address
+ ip nat inside
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1.10
+ encapsulation dot1Q 30
+ ip address 172.17.116.1 255.255.254.0
+ ip nat inside
+!
+interface FastEthernet0/1.20
+ encapsulation dot1Q 20
+ ip address 172.17.118.1 255.255.255.0
+ ip nat inside
+!
+interface FastEthernet0/1.67
+ encapsulation dot1Q 99
+ ip address 172.17.119.1 255.255.255.252
+ ip nat inside
+!
+interface Serial0/0/0
+ ip address 172.17.119.6 255.255.255.252
+ ip nat inside
+ clock rate 128000
+!
+interface Serial0/0/1
+ no ip address
+ clock rate 2000000
+ shutdown
+!
+interface Modem0/1/0
+ no ip address
+!
+interface Modem0/1/1
+ no ip address
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 1
+ router-id 33.33.33.33
+ log-adjacency-changes
+ redistribute static subnets 
+ network 172.17.119.4 0.0.0.3 area 0
+ network 172.17.116.0 0.0.1.255 area 0
+ network 172.17.118.0 0.0.0.255 area 0
+ network 172.17.119.0 0.0.0.3 area 0
+ default-information originate
+!
+ip nat pool PUBLIC_ACCESS 209.165.199.226 209.165.199.239 netmask 255.255.255.240
+ip nat inside source list 1 pool PUBLIC_ACCESS overload
+ip classless
+ip route 0.0.0.0 0.0.0.0 209.165.199.117 120
+!
+ip flow-export version 9
+!
+!
+access-list 1 permit 172.17.112.0 0.0.7.255
+!
+!
+!
+!
+!
+!
+line con 0
+ password cisco
+ logging synchronous
+ login
+!
+line aux 0
+!
+line vty 0 4
+ password cisco
+ logging synchronous
+ login
+!
+!
+!
+end
