@@ -1,0 +1,110 @@
+Current configuration : 1540 bytes
+!
+version 12.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname Main
+!
+!
+!
+enable secret 5 $1$mERr$9cTjUIEqNGurQiFU.ZeCi1
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+no ip domain-lookup
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ ip address 209.165.199.114 255.255.255.252
+ ip nat outside
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ ip address 172.17.114.129 255.255.255.240
+ ip nat inside
+ duplex auto
+ speed auto
+!
+interface Serial0/0/0
+ ip address 172.17.114.153 255.255.255.252
+ ip nat inside
+ clock rate 128000
+!
+interface Serial0/0/1
+ ip address 172.17.114.157 255.255.255.252
+ ip nat inside
+ clock rate 128000
+!
+interface Modem0/1/0
+ no ip address
+!
+interface Modem0/1/1
+ no ip address
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 1
+ router-id 44.44.44.44
+ log-adjacency-changes
+ network 172.17.114.128 0.0.0.15 area 0
+ network 172.17.114.152 0.0.0.3 area 0
+ network 172.17.114.156 0.0.0.3 area 0
+ default-information originate
+!
+ip nat pool PUBLIC_POOL 209.165.199.226 209.165.199.238 netmask 255.255.255.240
+ip nat inside source list 1 pool PUBLIC_POOL overload
+ip nat inside source static 172.17.114.130 209.165.199.229 
+ip classless
+ip route 0.0.0.0 0.0.0.0 209.165.199.117 10
+ip route 0.0.0.0 0.0.0.0 209.165.199.113 
+!
+ip flow-export version 9
+!
+!
+access-list 1 permit 172.17.112.0 0.0.7.255
+!
+!
+!
+!
+!
+!
+line con 0
+ password cisco
+ login
+!
+line aux 0
+!
+line vty 0 4
+ password cisco
+ login
+!
+!
+!
+end
