@@ -130,24 +130,20 @@ From **`209.165.199.112/29`**:
 ## 12) Repository Structure (suggested)
 
 ```
-AIT-Network-Case-Study-Individual/
+Network-Simulation/
 ├── README.md  ← this file
 ├── PacketTracer/
-│   └── AIT_Network_Individual.pkt
+│   └── Network.pkt
 ├── addressing/
-│   ├── vlan_subnets.xlsx
-│   ├── p2p_allocations.xlsx
-│   └── isp_links.md
+│   ├── addressing.pdf
 ├── configs/
 │   ├── main_router.txt
 │   ├── branch_router.txt
-│   ├── west_switch.txt
-│   └── east_switch.txt
-└── screenshots/
-    ├── show_ip_int_brief_main.png
-    ├── show_vlan_brief_west.png
-    ├── nat_translations_main.png
-    └── ping_1.1.1.1.png
+│   ├── west_router.txt
+│   └── east_router.txt
+│   └── isp_router.txt
+│   └── thomas_switch.txt
+│   └── jones_switch.txt
 
 ```
 
