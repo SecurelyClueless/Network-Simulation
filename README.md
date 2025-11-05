@@ -3,6 +3,9 @@ Cisco Packet Tracer build for a campus network: VLSM IPv4 design, VLANs &amp; in
 
 # Network Design & Implementation
 
+
+![Network_diagram](https://github.com/user-attachments/assets/fbbb0b9a-f082-4b19-991b-1bb8d322f302)
+
 ---
 
 ## 1) Project Overview
